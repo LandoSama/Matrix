@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "Matrix.h"
+#include "Matrix.hpp"
 
 int main() {
 	Matrix x(2,2), y(2,2), z(1,1), b(4,4);
