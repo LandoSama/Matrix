@@ -106,7 +106,7 @@ Matrix<T>::~Matrix() {
 }
 
 template <typename T>
-Matrix<T> &Matrix::operator=(const Matrix<T>& m) {
+Matrix<T> &Matrix<T>::operator=(const Matrix<T>& m) {
 	if (this == &m) { 
 		// avoid self-assignment
 		return *this;
@@ -126,7 +126,7 @@ Matrix<T> &Matrix::operator=(const Matrix<T>& m) {
 }
 
 template <typename T>
-Matrix<T> &Matrix::operator+=(const Matrix<T> &m) {
+Matrix<T> &Matrix<T>::operator+=(const Matrix<T> &m) {
 	assert(dx==m.dx);
 	assert(dy==m.dy);
 	// x+=y adds the y-entries into the x-entries
@@ -139,13 +139,13 @@ Matrix<T> &Matrix::operator+=(const Matrix<T> &m) {
 }
 
 template <typename T>
-Matrix<T> Matrix::operator+(const Matrix<T> &m) {
+Matrix<T> Matrix<T>::operator+(const Matrix<T> &m) {
 	Matrix<T> temp(*this); //copy constructor
 	return (temp += m);
 }
 
 template <typename T>
-Matrix<T> &Matrix::operator-=(const Matrix<T> &m){
+Matrix<T> &Matrix<T>::operator-=(const Matrix<T> &m){
 	assert(dx==m.dx);
 	assert(dy==m.dy);
 	// x+=y adds the y-entries into the x-entires
@@ -158,13 +158,13 @@ Matrix<T> &Matrix::operator-=(const Matrix<T> &m){
 }
 
 template <typename T>
-Matrix<T> Matrix::operator-(const Matrix<T> &m){
+Matrix<T> Matrix<T>::operator-(const Matrix<T> &m){
 	Matrix<T> temp(*this); //copy constructor
 	return(temp -= m);
 }
 
 template <typename T>
-ostream &operator<< <T>
+ostream &operator<< 
 (ostream &out, const Matrix<T> &m) 
 {
 	for (int i = 0; i < m.dx; ++i)	{
