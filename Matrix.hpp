@@ -5,9 +5,30 @@
 using namespace std;
 
 template<typename T>
+class Matrix;
+
+template<typename T>
+ostream &operator << (ostream &out, const Matrix<T> &m);
+
+template<typename T>
+Matrix<T> operator*
+		(const Matrix<T> & m1, const Matrix<T> & m2);
+
+template<typename T>
+Matrix<T> operator*
+		(T c, const Matrix<T> & m2);
+
+template<typename T>		
+Matrix<T> operator* 
+		(const Matrix<T> & m1, T c);
+
+template <typename T>
+T det(T **b, int m);
+
+template<typename T>
 class Matrix {
 public:
-	Matrix(int sizeX, int sizeY);
+	Matrix(int sizeX = 1, int sizeY = 1);
 	Matrix();
 	~Matrix();
 	Matrix(const Matrix<T>& m);
@@ -16,16 +37,16 @@ public:
 	Matrix& operator+=(const Matrix<T> & m);
 	Matrix	operator-(const Matrix<T>& m);
 	Matrix&	operator-=(const Matrix<T>& m);
-	friend ostream &operator<<
+	friend ostream &operator<< <T>
 		(ostream &out, const Matrix<T> &m);
 	T &operator()(T x, T y);
 	bool is_square();
-	T detmnt();
-	friend Matrix operator*
+	void detmnt();
+	friend Matrix operator* <T>
 		(const Matrix<T> & m1, const Matrix<T> & m2);
-	friend Matrix operator*
+	friend Matrix operator* <T>
 		(T c, const Matrix<T> & m2);               	
-	friend Matrix operator*
+	friend Matrix operator* <T>
 		(const Matrix<T> & m1, T c);
 
 private:
@@ -43,7 +64,7 @@ private:
 };
 
 template <typename T>
-Matrix::Matrix(int sizeX=1, int sizeY=1)
+Matrix<T>::Matrix(int sizeX, int sizeY)
 : dx(sizeX),dy(sizeY)  {
 	allocArrays();
 	for (int i = 0; i < dx; i++)	{
@@ -143,7 +164,7 @@ Matrix<T> Matrix::operator-(const Matrix<T> &m){
 }
 
 template <typename T>
-ostream &operator<<
+ostream &operator<< <T>
 (ostream &out, const Matrix<T> &m) 
 {
 	for (int i = 0; i < m.dx; ++i)	{
@@ -155,14 +176,14 @@ ostream &operator<<
 }
 
 template <typename T> 
-T &Matrix::operator()(T i, T j) {
+T &Matrix<T>::operator()(T i, T j) {
 	assert(i>=0 && i<dx);
 	assert(j>=0 && j<dy);
 	return p[i][j];
 }
 
 template <typename T>
-Matrix<T> operator*(const Matrix<T>& m1, const Matrix<T>& m2) {
+Matrix<T> operator* (const Matrix<T>& m1, const Matrix<T>& m2) {
 	Matrix<T> prod(m1.dx, m2.dy);
 	for (int i=0; i<prod.dx; ++i) {
 		for (int j=0; j<prod.dy; ++j) {
@@ -175,7 +196,7 @@ Matrix<T> operator*(const Matrix<T>& m1, const Matrix<T>& m2) {
 }
 
 template <typename T>
-Matrix<T> operator*(T c, const Matrix<T>& m2) {
+Matrix<T> operator* (T c, const Matrix<T>& m2) {
 	Matrix<T> prod(m2);
 	for (int i=0; i<prod.dx; ++i) {
 		for (int j=0; j<prod.dy; ++j) {
@@ -186,17 +207,10 @@ Matrix<T> operator*(T c, const Matrix<T>& m2) {
 }
 
 template <typename T>
-Matrix<T> operator*(const Matrix& m2, T c) {
+Matrix<T> operator* (const Matrix& m2, T c) {
 	return c*m2;
 }
 
-template <typename T>
-void Matrix::detmnt()
-{
-     T det(T **b,int m);
-     cout<<"det is "<<det(p,dx) << endl;
-}
- 
 template <typename T>
 T det(T **b,int m)
 {
@@ -226,3 +240,9 @@ T det(T **b,int m)
     return sum;
 }
 
+template <typename T>
+void Matrix<T>::detmnt()
+{
+     T det(T **b,int m);
+     cout<<"det is "<<det(p,dx) << endl;
+}
