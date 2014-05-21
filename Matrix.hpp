@@ -207,24 +207,36 @@ Matrix<T> operator* (T c, const Matrix<T>& m2) {
 }
 
 template <typename T>
-Matrix<T> operator* (const Matrix& m2, T c) {
+Matrix<T> operator* (const Matrix<T>& m2, T c) {
 	return c*m2;
+}
+
+template <typename T>
+void Matrix<T>::detmnt()
+{
+
+     determ = det(p, dx);
+     cout<<"det is "<< determ << endl;
 }
 
 template <typename T>
 T det(T **b,int m)
 {
+	cout << "this is something" << endl;
     int sum=0,x=0,y=0,i=0,j,aa,bb;
     T **c;
     c = new T*[m];
+    cout << "this is something 2" << endl;
 	for (int i = 0; i < m; i++)	{
 		c[i] = new T[m]; 
+		
 	}
-    
+    cout << "this is something 3" << endl;
     if(m==2)
             return(b[0][0]*b[1][1]-b[0][1]*b[1][0]);
     else{
         for(j=0;j<m;j++){
+			cout << "this is something 4" << endl;
 			for(aa=0,y=0;aa<m;aa++){
 				for(bb=0;bb<m;bb++){
 					if((aa!=i)&&(bb!=j)){
@@ -238,11 +250,4 @@ T det(T **b,int m)
 		}
 	}
     return sum;
-}
-
-template <typename T>
-void Matrix<T>::detmnt()
-{
-     T det(T **b,int m);
-     cout<<"det is "<<det(p,dx) << endl;
 }
